@@ -1,0 +1,17 @@
+CREATE OR REPLACE TRIGGER TRG_BEFORE_ALTER
+BEFORE ALTER ON DATABASE
+BEGIN
+
+    IF USER = 'DBSEC' THEN
+     RAISE_APPLICATION_ERROR(-20000, 'YOU MAY NOT MODIFY STRUCTURE OF ANY TABLE');
+    END IF;
+END;
+/
+
+---------------------------------------------------
+
+ALTER TABLE CUSTOMERS
+    MODIFY NAME VARCHAR2(60)
+/
+
+---------------------------------------------------

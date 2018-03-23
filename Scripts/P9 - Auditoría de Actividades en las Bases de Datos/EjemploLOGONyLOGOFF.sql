@@ -1,0 +1,53 @@
+CREATE TABLE APP_AUDIT_LOGINS
+(
+    LOGINS_ID NUMBER,
+    SESSION_ID NUMBER,
+    USERNAME VARCHAR2(30),
+    LOGON_TIME DATE,
+    LOGOFF_TIME DATE,
+    IP_ADDRESS VARCHAR2(255),
+    AUD_INS_DTTM DATE,
+    AUD_UPD_DTTM DATE
+)
+/
+
+CREATE SEQUENCE SEQ_LOGIN_ID
+/
+
+---------------------------------------------------
+
+CREATE OR REPLACE TRIGGER TRG_AFTER_LOGON
+    AFTER LOGON ON DATABASE
+BEGIN
+    INSERT INTO APP_AUDIT_LOGINS VALUES
+        (
+            SEQ_LOGIN_ID.NEXTVAL,
+            SYS_CONTEXT('USERENV', 'SESSIONID'),
+            USER,
+            SYSDATE,
+            NULL,
+            SYS_CONTEXT('USERENV', 'IP_ADDRESS'),
+            SYSDATE,
+            NULL
+        );
+END;
+/
+
+CREATE OR REPLACE TRIGGER TRG_BEFORE_LOGOFF
+    BEFORE LOGOFF ON DATABASE
+BEGIN
+    UPDATE APP_AUDIT_LOGINS SET 
+        LOGOFF_TIME = SYSDATE,
+        AUD_UPD_DTTM = SYSDATE
+    WHERE SESSION_ID = SYS_CONTEXT('USERENV', 'SESSIONID')
+     AND USERNAME = USER
+     AND LOGOFF_TIME IS NULL;
+END;
+/
+
+---------------------------------------------------
+
+SELECT * FROM APP_AUDIT_LOGINS
+/
+
+---------------------------------------------------
