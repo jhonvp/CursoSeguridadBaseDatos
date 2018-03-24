@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `App_Audit_Trail` (
 -- -----------------------------------------------------
 -- Table `DEBSEC2018`.`App_Data_Dictionary`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `App_Data_Dictionary` ;
+DROP TABLE IF EXISTS `DEBSEC2018`.`App_Data_Dictionary` ;
 
 CREATE TABLE IF NOT EXISTS `App_Data_Dictionary` (
   `Class_Id` INT NOT NULL AUTO_INCREMENT,
