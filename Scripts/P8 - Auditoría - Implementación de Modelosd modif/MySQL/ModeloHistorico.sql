@@ -27,3 +27,30 @@ INSERT INTO Empresas(nombreEmpresa,ciudadEmpresa) VALUES ("COCA COLA","BOGOTA");
 SELECT * FROM Empresas;
 
 SELECT * FROM Empresas_Historico;
+
+
+
+DROP TRIGGER IF EXISTS empresaHistoricoUpdate;
+
+DELIMITER $$
+
+CREATE TRIGGER empresaHistoricoUpdate BEFORE UPDATE ON Empresas
+	FOR EACH ROW
+       BEGIN
+          INSERT INTO Empresas_Historico_Update
+          (idEmpresa,nombreEmpresaOld,nombreEmpresaNew,ciudadEmpresaOld,
+          ciudadEmpresaNew,fecha)
+            VALUES (NEW.idEmpresa,OLD.nombreEmpresa,
+            NEW.nombreEmpresa,OLD.ciudadEmpresa,
+            NEW.ciudadEmpresa, CURDATE());
+       END; $$
+DELIMITER ;
+
+UPDATE Empresas
+SET nombreEmpresa="Nueva Empresa",ciudadEmpresa="NuevaCiudad"
+WHERE idEmpresa=1;
+
+SELECT *
+FROM Empresas;
+SELECT *
+FROM Empresas_Historico_Update;
