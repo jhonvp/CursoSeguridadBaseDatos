@@ -1,13 +1,16 @@
+DROP TABLE IF EXISTS `Invoice_Header` ;
+
 CREATE TABLE Invoice_Header(
-    idInvoice INT PRIMARY KEY,
+    idInvoice INT PRIMARY KEY AUTO_INCREMENT,
     idConstumer NVARCHAR(45),
-    dataInvoice DATE,
-    dataDue DATE
+    dateInvoice DATE,
+    dateDue DATE
 );
 
+DROP TABLE IF EXISTS `Invoice_LineItem` ;
 
 CREATE TABLE Invoice_LineItem(
-    idLineItem INT PRIMARY KEY,
+    idLineItem INT PRIMARY KEY AUTO_INCREMENT,
     idInvoice INT,
     amount DOUBLE
 );
