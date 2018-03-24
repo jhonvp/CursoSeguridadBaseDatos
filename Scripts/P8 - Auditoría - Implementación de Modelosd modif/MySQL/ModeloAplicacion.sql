@@ -62,9 +62,11 @@ values ('Credit Invoice');
 insert into App_Data_Dictionary(Class_Desc) 
 values ('Invoice');
 
-insert into Invoice_Header (idConstumer, dateInvoice, dateDue) values (1, CURDATE(),DATE_ADD(CURDATE(), INTERVAL 30 DAY));
+insert into Invoice_Header(idConstumer, dateInvoice, dateDue) 
+values (1, CURDATE(),DATE_ADD(CURDATE(), INTERVAL 30 DAY));
 
-insert into Invoice_LineItem (idInvoice, Amount) values (1, 5000);
+insert into Invoice_LineItem (idInvoice, Amount) 
+values (1, 5000);
 
 
 
