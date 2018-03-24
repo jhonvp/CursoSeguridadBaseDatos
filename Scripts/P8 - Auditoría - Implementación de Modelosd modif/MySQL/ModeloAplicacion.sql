@@ -14,8 +14,50 @@ CREATE TABLE Invoice_LineItem(
 
 
 
-insert into App_Audit_Actions (Action_Desc) values ('Credit Invoice');
-insert into App_Data_Dictionary(Class_Desc) values ('Invoice');
+
+-- -----------------------------------------------------
+-- Table `DEBSEC2018`.`App_Audit_Actions`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `App_Audit_Actions` ;
+
+CREATE TABLE IF NOT EXISTS `App_Audit_Actions` (
+  `Action_Id` INT NOT NULL AUTO_INCREMENT,
+  `Action_Desc` VARCHAR(45) NULL,
+  PRIMARY KEY (`Action_Id`));
+
+
+-- -----------------------------------------------------
+-- Table `DEBSEC2018`.`App_Audit_Trail`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `App_Audit_Trail` ;
+
+CREATE TABLE IF NOT EXISTS `App_Audit_Trail` (
+  `Audit_Trail_Id` INT NOT NULL AUTO_INCREMENT,
+  `Class_Id` INT NULL,
+  `Action_Id` INT NULL,
+  `Object_Id` INT NULL,
+  `Reason` VARCHAR(45) NULL,
+  `CTL_UPD_DTTM` DATE NULL,
+  `CTL_UPD_USER` VARCHAR(45) NULL,
+  PRIMARY KEY (`Audit_Trail_Id`));
+
+
+-- -----------------------------------------------------
+-- Table `DEBSEC2018`.`App_Data_Dictionary`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `App_Data_Dictionary` ;
+
+CREATE TABLE IF NOT EXISTS `App_Data_Dictionary` (
+  `Class_Id` INT NOT NULL AUTO_INCREMENT,
+  `Class_Desc` VARCHAR(45) NULL,
+  PRIMARY KEY (`Class_Id`));
+
+
+
+insert into App_Audit_Actions (Action_Desc) 
+values ('Credit Invoice');
+insert into App_Data_Dictionary(Class_Desc) 
+values ('Invoice');
 
 insert into Invoice_Header (idConstumer, dateInvoice, dateDue) values (1, CURDATE(),DATE_ADD(CURDATE(), INTERVAL 30 DAY));
 
