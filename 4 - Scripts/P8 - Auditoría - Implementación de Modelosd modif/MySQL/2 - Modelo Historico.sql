@@ -1,11 +1,11 @@
 CREATE TABLE Empresas(
-    idEmpresa INT PRIMARY KEY AUTOINCREMENT,
+    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
     nombreEmpresa VARCHAR(45),
     ciudadEmpresa varchar(45)
 );
 
 CREATE TABLE Empresas_Historico(
-    idHistorico INT PRIMARY KEY AUTOINCREMENT,
+    idHistorico INT PRIMARY KEY AUTO_INCREMENT,
     idEmpresa INT,
     nombreEmpresa VARCHAR(45),
     ciudadEmpresa varchar(45)
@@ -53,4 +53,4 @@ WHERE idEmpresa=1;
 SELECT *
 FROM Empresas;
 SELECT *
-FROM Empresas_Historico_Update;
+FROM Empresas_Historico;
