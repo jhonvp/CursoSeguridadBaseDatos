@@ -1,3 +1,3 @@
-DROP USER jhonvillarreal
+DROP USER jhonvillarreal;
 
-DROP USER jhonvillarreal CASCADE
+DROP USER jhonvillarreal CASCADE;
